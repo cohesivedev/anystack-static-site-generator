@@ -1,6 +1,5 @@
 [build]
-  command = "node ."
-  publish = "public/cohesivedev.herokuapp.com/"
+  command = "npm run build"
 
 [template]
   incoming-hooks = ["Ghost"]
