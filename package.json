@@ -1,0 +1,23 @@
+{
+  "name": "anystack-static-site-generator",
+  "description": "Capture a website for use as a static site",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "cohesive.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cohesivedev/anystack-static-site-generator.git"
+  },
+  "engines": {
+    "node": ">= 8.x"
+  },
+  "scripts": {
+    "build": "node .",
+    "test": "URLS='https://cohesivedev.herokuapp.com' FAVICON_URL='https://i.imgur.com/wjH209s.png' node ."
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "rimraf": "^3.0.0",
+    "website-scraper": "^4.2.0"
+  }
+}
