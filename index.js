@@ -16,7 +16,7 @@ const rmrf                              = require('rimraf');
 // e.g. "https://cohesivedev.herokuapp.com%%%https://cohesivedev.herokuapp.com/availability"
 
 const URLS          = process.env.URLS.split('%%%');
-const EXCLUDED_URLS = process.env.EXCLUDED_URLS.split('%%%');
+const EXCLUDED_URLS = (process.env.EXCLUDED_URLS || '').split('%%%');
 
 // For favicon
 const ORIGIN_HOSTNAME = URLS[0].replace(/^http[s]*:\/\//, '');
