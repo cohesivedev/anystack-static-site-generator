@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "node .",
-    "test": "URLS='https://cohesivedev.herokuapp.com' FAVICON_URL='https://i.imgur.com/wjH209s.png' node ."
+    "test": "URLS='https://cohesivedev.herokuapp.com%%%https://cohesivedev.github.io/babbleboard' EXCLUDED_URLS='https://cohesivedev.herokuapp.com/babbleboard' POST_MIRROR_CMD='cp -rp public/cohesivedev.github.io/* public/cohesivedev.herokuapp.com/'  FAVICON_URL='https://i.imgur.com/wjH209s.png' node ."
   },
   "dependencies": {
     "request": "^2.88.0",

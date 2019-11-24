@@ -10,3 +10,5 @@ You have these environment variables at your disposal:
 |---|---|---|
 | `URLS` | URLs to be mirrored (delimited with `%%%`) | "https://cohesivedev.herokuapp.com%%%https://cohesivedev.herokuapp.com/availability" |
 | `FAVICON_URL` | URL for the site's favicon | "https://i.imgur.com/wjH209s.png" |
+| `POST_MIRROR_CMD` | Command to run after the mirroring operation has finished |
+| `EXCLUDED_URLS` | URLs to exclude during the mirroring process |

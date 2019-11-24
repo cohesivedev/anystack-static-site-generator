@@ -3,8 +3,10 @@ if (!process.env.URLS) {
     process.exit(1);
 }
 
-const faviconURL = process.env.FAVICON_URL;
+const faviconURL        = process.env.FAVICON_URL;
+const postMirrorCommand = process.env.POST_MIRROR_CMD;
 
+const {execSync}                        = require('child_process');
 const {copyFileSync, createWriteStream} = require('fs');
 const request                           = require('request');
 const scrape                            = require('website-scraper');
@@ -13,16 +15,23 @@ const rmrf                              = require('rimraf');
 // URLs should be delimited with `%%%`
 // e.g. "https://cohesivedev.herokuapp.com%%%https://cohesivedev.herokuapp.com/availability"
 
-const URLS            = process.env.URLS.split('%%%');
-const ORIGIN          = URLS[0];
-const ORIGIN_HOSTNAME = ORIGIN.replace(/^http[s]*:\/\//, '');
+const URLS          = process.env.URLS.split('%%%');
+const EXCLUDED_URLS = process.env.EXCLUDED_URLS.split('%%%');
 
-const STARTS_WITH_ORIGIN   = new RegExp('^' + ORIGIN);
+// For favicon
+const ORIGIN_HOSTNAME = URLS[0].replace(/^http[s]*:\/\//, '');
+
+const STARTS_WITH_ORIGIN   = new RegExp(`^(${URLS.join('|')})`);
 const STARTS_WITH_PROTOCOL = new RegExp('^http|https', 'i');
 
 const hostedDirectory = __dirname + '/public/';
 
 function filterUrlByRelativeLinksAndFromSameOrigin(url) {
+    if (EXCLUDED_URLS.indexOf(url) > -1) {
+        console.log('Excluded', url);
+        return false;
+    }
+
     if (STARTS_WITH_PROTOCOL.test(url)) {
         return STARTS_WITH_ORIGIN.test(url);
     } else {
@@ -54,4 +63,9 @@ scrape({
             copyFileSync(`${__dirname}/favicon.png`, `${hostedDirectory}${ORIGIN_HOSTNAME}/favicon.png`);
         }
         console.log('Mirroring complete.');
+    })
+    .then(() => {
+        if (postMirrorCommand) {
+            execSync(postMirrorCommand);
+        }
     });
