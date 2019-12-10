@@ -12,3 +12,12 @@ You have these environment variables at your disposal:
 | `FAVICON_URL` | URL for the site's favicon | "https://i.imgur.com/wjH209s.png" |
 | `POST_MIRROR_CMD` | Command to run after the mirroring operation has finished |
 | `EXCLUDED_URLS` | URLs to exclude during the mirroring process |
+
+You can see an example of these variables being used here or within the `yarn test` command.
+```
+URLS='https://babbleboardcms.herokuapp.com%%%https://cohesivedev.github.io/babbleboard' \
+EXCLUDED_URLS='https://babbleboardcms.herokuapp.com/online' \
+POST_MIRROR_CMD='cd public/babbleboardcms.herokuapp.com/ ; mkdir online ; mv ../cohesivedev.github.io/babbleboard/* online/'  \
+FAVICON_URL='https://i.imgur.com/wjH209s.png' \
+node .
+```
